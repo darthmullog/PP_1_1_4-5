@@ -1,16 +1,14 @@
 package jm.task.core.jdbc.model;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
+
 @Entity
 @Table(name = "user")
-
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -23,7 +21,6 @@ public class User {
     private Byte age;
 
     public User() {
-
     }
 
     public User(String name, String lastName, Byte age) {
@@ -73,6 +70,7 @@ public class User {
                 ", age=" + age +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +79,7 @@ public class User {
         return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name) &&
                 Objects.equals(lastName, user.lastName) &&
-                age == user.age; // Используйте примитивное сравнение для 'age', так как это базовый тип
+                age == user.age;
     }
 
     @Override
